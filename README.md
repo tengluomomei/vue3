@@ -19,6 +19,17 @@
     第三步：npm install
     第四步：npm run dev
 
+# 安装其他
+    路由：vue-router@4
+    UI：element-plus
+
+# 四种语法范式
+
+    选项式写法：Vue2写法，不推荐
+    组合式写法：只使用setup()，把组合式API写在setup中就是组合式写法， 麻烦,不推荐
+    选项式+组合式写法：可以使用setup()+选项式写法，混乱不推荐
+    组合式语法糖写法：在script标签上添加setup，只支持组合式写法
+
 # setup
 
     setup 组件选项
@@ -38,6 +49,31 @@
     setup：setup内注册生命周期钩子
 
     hooks:setup中相关联的功能封装成一个个可独立可维护的hooks
+
+# Hooks封装
+    所谓 Hooks封装，就是把不同的逻辑关注点抽离出来，以达到业务逻辑的独立性。这也是Vue3的最大亮点。
+
+    2，如何封装Hooks
+    在 setup 组合的开发模式下，把具体某个业务功能所用到的 ref、reactive、watch、computed、watchEffect 等，提取到一个以 use* 开头的自定义函数中去。
+    封装成 use* 开头的Hooks函数，不仅可以享受到封装带来的便利性，还有利于代码逻辑的复用。
+    Hooks函数的另一个特点是，被复用时可以保持作用域的独立性，同一个Hooks函数被多次复用，彼此是不干扰的。
+
+    3.使用场景：
+        1.功能类Hooks，即为了逻辑复用的封装；
+        2.业务类Hooks，即为了逻辑解耦的封装
+
+# router
+    结合element-plus搭建项目：https://element-plus.gitee.io/zh-CN/component
+
+    v4和v3路由的区别：
+        1.vue3必须要使用vue-router(v4)
+        2.创建router实例的方式变了，使用 const router = createRouter({history, routes:[]})
+        3.指定路由模式的属性变了，使用history属性：createWebHashHistory()   带#的hash路由模式 / createWebHistory()不带#的history路由模式
+        4.路由注册，在mian.js中 app.use(router)
+        5.如果是选项式组件，this.$router/this.$route可以正常使用；如果是组合式API进行开发，必须使用 useRoute、userRouter等API
+        6.router-link已经没有tag属性的，可以用custom和插槽实现自定义渲染
+        7.router-view新增了"插槽"功能，极其强大，参见路由文档中的伪代码，它在实现keep-alive和transition动画将变得更简单，还可以Suspense实现Loading。
+        8.新增了几个组合API：useRoute / useRouter
 
 
 # 组合式API
@@ -155,30 +191,6 @@
     ref:访问refs绑定的组件的属性或者方法
         在vue2上，如果ref定义在组件上，是为了获取组件实例,vue3也是如此.
         子组件通过defineExpose向外暴露父组件想获取的值.
-
-# Hooks封装
-    所谓 Hooks封装，就是把不同的逻辑关注点抽离出来，以达到业务逻辑的独立性。这也是Vue3的最大亮点。
-
-    2，如何封装Hooks
-    在 setup 组合的开发模式下，把具体某个业务功能所用到的 ref、reactive、watch、computed、watchEffect 等，提取到一个以 use* 开头的自定义函数中去。
-    封装成 use* 开头的Hooks函数，不仅可以享受到封装带来的便利性，还有利于代码逻辑的复用。Hooks函数的另一个特点是，被复用时可以保持作用域的独立性，即，同一个Hooks函数被多次复用，彼此是不干扰的。
-
-    3.使用场景：
-        1.功能类Hooks，即为了逻辑复用的封装；
-        2.业务类Hooks，即为了逻辑解耦的封装
-
-# router
-    结合element-plus搭建项目：https://element-plus.gitee.io/zh-CN/component
-
-    v4和v3路由的区别：
-        1.vue3必须要使用vue-router(v4)
-        2.创建router实例的方式变了，使用 const router = createRouter({history, routes:[]})
-        3.指定路由模式的属性变了，使用history属性：createWebHashHistory()   带#的hash路由模式 / createWebHistory()不带#的history路由模式
-        4.路由注册，在mian.js中 app.use(router)
-        5.如果是选项式组件，this.$router/this.$route可以正常使用；如果是组合式API进行开发，必须使用 useRoute、userRouter等API
-        6.router-link已经没有tag属性的，可以用custom和插槽实现自定义渲染
-        7.router-view新增了"插槽"功能，极其强大，参见路由文档中的伪代码，它在实现keep-alive和transition动画将变得更简单，还可以Suspense实现Loading。
-        8.新增了几个组合API：useRoute / useRouter
 
 # Pinia使用:
     https://pinia.web3doc.top/

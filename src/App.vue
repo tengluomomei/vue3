@@ -1,30 +1,89 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <!-- <router-link to="/dashboard">首页</router-link> | 
+  <router-link to="/good/list">商品列表</router-link> | 
+  <router-link to="/order/list">订单列表</router-link> | -->
+
+  <router-view></router-view>
+  <!-- <p>{{ num }}</p>
+  <button @click="addFun">+1</button> -->
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<!-- <script>
+  // import HelloWorld from './components/HelloWorld.vue'
+  // 选项式API
+  export default{
+    data(){
+      return{
+        num: 0
+      }
+    },
+    methods:{
+      addFun(){
+        this.num++
+      }
+    }
+  }
+</script> -->
+
+<!-- <script>
+  import {ref} from 'vue'
+  export default{
+    setup(){
+        const num = ref(0)
+        console.log(num.value)
+
+      const addFun = ()=>{
+        num.value++
+      }
+
+      return {
+        num,
+        addFun
+      }
+    }
+  }
+</script> -->
+
+<script setup>
+  import {ref} from 'vue'
+  import HelloWorld from './components/HelloWorld.vue'
+
+  // hooks
+  import useCount from './hooks/useCount'
+  const {count, addFun, subFun } = useCount()
+
+  // const num = ref(0)
+  // console.log(num.value)
+
+  // const addFun = ()=>{
+  //   num.value++
+  // }
+</script>
+
+
+<style>
+html,body{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+#app{
+  width: 100%;
+  height: 100%;
+  padding: 0;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.el-container{
+  width: 100%;
+  height: 100%; 
 }
+.el-aside{
+  background: #ccc;
+}
+
+.el-header{
+  background: #c6e2ff;
+}
+
 </style>
