@@ -109,7 +109,7 @@
 
     shallowReactive: 定义一个reactive变量，只对它的第一层进行Proxy, 只有第一层变化时视图才更新
 
-    computed:计算属性,两种方法
+    computed:计算属性,两种方法(https://blog.csdn.net/ct5211314/article/details/125874348)
 
     watch:
         watch(WatcherSource, Callback, [WatchOptions]):
