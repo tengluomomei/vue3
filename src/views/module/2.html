@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"><!--  -->
+    <meta http-equiv="Cache-Control" content="max-age=-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>vue</title>
+    <style>
+        html,body{
+            background: #fff !important;
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .box2{
+            width: 50px;
+            height: 50px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    <!-- <my-ipt :value="name" @input="gn"></my-ipt> -->
+
+    <!-- $event是父组件接收子组件传递过来的数据 -->
+    <!-- <my-ipt :value="name" @input="name = $event"></my-ipt> -->
+
+    <!-- v-model: :value+@input的语法糖 -->
+    <my-ipt v-model="name"></my-ipt>
+    {{name}}
+
+    </div>
+
+    <script src="https://pic.iyingdi.com/webview/js/vue.min.js"></script>
+
+    <script>
+        let myIpt = {
+            template: `<p><input type="text" :value="value" @input="$emit('input', $event.target.value)"></p>`,
+            props: ['value'],
+            methods:{
+                fn(e){
+                    this.$emit('input', e.target.value)
+                }
+            }
+        }
+
+        let vm = new Vue({
+            el: '#app',
+            data(){
+                return {
+                    name: ''
+                }
+            },
+            components:{
+                myIpt,
+            },
+            methods: {
+                gn(data){
+                    this.name = data
+                }
+            },
+        }) 
+    </script>
+</body>
+</html>

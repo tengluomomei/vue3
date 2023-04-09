@@ -132,7 +132,7 @@
             2，引用数据类型：直接监听创建的reactive对象，其中只要有属性变更，都能被监听到。但是它只能获取到新值。
             3，reactive创建的响应式数据，深度监听设置是无效的，也就是deep:true/false都是能监听到的。
             
-        监听多个数据：
+        监听多个数据：watch([num, total], ([newNum, newTotal],[oldNum,oldTotal])=>{})
 
     watchEffect:相当于是 react中的 useEffect()，用于执行各种副作用
         watchPostEffect，等价于 watchEffect(fn, {flush:'pre'})，前置执行的副作用。
@@ -191,6 +191,30 @@
     ref:访问refs绑定的组件的属性或者方法
         在vue2上，如果ref定义在组件上，是为了获取组件实例,vue3也是如此.
         子组件通过defineExpose向外暴露父组件想获取的值.
+
+    provide/inject:
+        provide：父级向子孙提供数据
+        inject：子孙使用父级提供的数据
+
+    eventBus: 弃用
+
+    v-model：
+        1.写在标签上: v-model = :value + @input
+        2.写在组件上:
+            vue2：v-model = :value + @input 
+
+            vue3:
+                v-model 默认绑定的属性名为：modelValue
+                v-model 默认绑定的事件名为：update:modelValue
+                vue3: v-model = :modelValue + @update:modelValue
+
+                自定义名称： <moduleDemo v-model:abc="lang"></moduleDemo>
+                        props: ['abc'],
+	                    emits: ['update:abc']         
+
+
+    vuex/pinia：(后面讲)
+
 
 # Pinia使用:
     https://pinia.web3doc.top/
