@@ -42,9 +42,35 @@ export const asyncRoutes = [
             component: () => import('@/views/order/list.vue'),
             name: 'orderList',
             meta: { title: '订单列表'}
+          },
+          {
+            path: '/order/watchEffect',
+            component: () => import('@/views/order/watchEffect.vue'),
+            name: 'watchEffect',
+            meta: { title: 'watchEffect'}
+          },
+          {
+            path: '/order/pinia',
+            component: () => import('@/views/order/pinia.vue'),
+            name: 'pinia',
+            meta: { title: 'pinia使用'}
           }
         ]
     },
+    {
+      path: '/todo',
+      component: Layout,
+      redirect: '/todo/list',
+      meta: { title: '任务列表'},
+      children: [
+        {
+          path: '/todo/list',
+          component: () => import('@/views/todo/list.vue'),
+          name: 'todoList',
+          meta: { title: '任务列表'}
+        }
+      ]
+  },
     {
         path: '/module',
         component: Layout,

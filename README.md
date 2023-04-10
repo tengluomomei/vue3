@@ -237,4 +237,33 @@
         使用$onAction(({name, after})=>{})
 
     警告: 如果你对store进行解构, 响应式会失效, 使用 storeToRefs包裹一层即可
+    
  
+# Vue3语法变化
+    1.在Vue2中，根组件挂载 DOM时，可以使用 el 选项、也可以使用 $mount(),在 Vue3中只能使用 $mount() 来挂载了;
+
+    2.v-for 和 ref 同时使用，这不再自动收集$refs。需要手动封装收集 ref 对象的方法，将其绑定在 ref 属性上；
+
+    3.使用 defineAsyncComponent 异步地加载组件，不能用在路由的懒加载中；
+
+    4.Vue3.0中的 $attrs，包含了父组件传递过来的所有属性，包括 class 和 style ，在Vue2中，$attrs 是接收不到 class 和 style;
+
+    5.Vue3中使用 app.directive() 来定义全局指令,定义指令时的钩子函数也发生改变；
+
+    6.Vue3中，移除了全局过滤器（Vue.filter）、移除了局部过滤器 filters选项, 可以封装自定义函数或使用 computed 计算属性来处理数据;
+
+    7.Vue2中的Vue构造函数,Vue3中已经不能再使用,所以Vue构造函数上的静态方法和属性，比如 Vue.use/Vue.mixin/Vue.prototype等都不能使用,可以用实例方法来代替app.use()；
+
+    8.使用app.provide() 来注入全局数据，替代app.config.globalProperties；
+
+    9.nextTick 
+        nextTick介绍：
+        Vue在观察到数据变化时，并不是直接更新DOM，而是开启一个队列，并且缓存同一轮事件循环中的所有数据改变。在缓冲时会除去重复的操作, 等到下一轮事件循环时，才开始更新。
+        $nextTick的作用：就是用来告知DOM什么时候更新完，当DOM更新完毕后，nextTick方法里面的回调就会执行
+
+        应用场景：
+            mounted 获取ajax数据，然后根据页面渲染数据的样式修改布局；
+            几乎所有更新数据后操作dom的操作，都需要用到异步更新队列；
+
+    10.Vue2中，组件有一个 render 选项（它本质上是一个渲染函数，这个渲染函数的形参是 h 函数），h 函数相当于 React 中的 createElement()。
+        在Vue3中，render 函数选项发生了变化：它的形参不再是 h 函数了。h 函数变成了一个全局 API，须导入后才能使用。
